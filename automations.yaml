@@ -1,0 +1,694 @@
+- id: '1677443650743'
+  alias: Aprinde lumina pe hol
+  description: ''
+  trigger:
+  - type: turned_on
+    platform: device
+    device_id: 31819de73fec99a575e630b9700975fe
+    entity_id: binary_sensor.1001395f33_0
+    domain: binary_sensor
+  - type: turned_on
+    platform: device
+    device_id: 31819de73fec99a575e630b9700975fe
+    entity_id: binary_sensor.1001395f33_1
+    domain: binary_sensor
+  - platform: state
+    entity_id:
+    - binary_sensor.lumi_lumi_sensor_magnet_aq2_opening
+    - light.lumi_lumi_switch_l1aeu1_light
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: time
+    after: 06:00:00
+    before: '22:00:00'
+  - condition: state
+    entity_id: light.lumi_lumi_switch_l1aeu1_light
+    state: 'off'
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.lumi_lumi_switch_l1aeu1_light
+  mode: single
+- id: '1677443952428'
+  alias: 'Stinge lumina pe hol '
+  description: ''
+  trigger:
+  - type: turned_off
+    platform: device
+    device_id: 31819de73fec99a575e630b9700975fe
+    entity_id: binary_sensor.1001395f33_0
+    domain: binary_sensor
+  - type: turned_off
+    platform: device
+    device_id: 31819de73fec99a575e630b9700975fe
+    entity_id: binary_sensor.1001395f33_1
+    domain: binary_sensor
+  condition:
+  - condition: state
+    entity_id: light.lumi_lumi_switch_l1aeu1_light
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.lumi_lumi_sensor_magnet_aq2_opening
+    state: 'off'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id:
+      - light.lumi_lumi_switch_l1aeu1_light
+      - switch.sonoff_100136eb7a
+  mode: single
+- id: '1677444160873'
+  alias: Aprinde plafoniera cand se apasa buton pe hol
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: c13f800c59d9472ad6a1a91c89d2ef62
+    entity_id: light.lumi_lumi_switch_l1aeu1_light
+    domain: light
+  condition:
+  - condition: state
+    entity_id: schedule.orar_lumina_hol
+    state: 'on'
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.sonoff_100136eb7a
+  mode: single
+- id: '1677444226373'
+  alias: Stinge lumina pe hol complet
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: c13f800c59d9472ad6a1a91c89d2ef62
+    entity_id: light.lumi_lumi_switch_l1aeu1_light
+    domain: light
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.sonoff_100136eb7a
+  mode: single
+- id: '1677446904372'
+  alias: Toggle veioza birou buton amprenta
+  description: ''
+  trigger:
+  - device_id: 3ef78dff8e92877219fa8af9c4735164
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: button
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    target:
+      entity_id: switch.sonoff_100063e853
+  mode: single
+- id: '1677447583636'
+  alias: Lumina de la cafea
+  description: ''
+  trigger:
+  - device_id: 1e7ba22f703c2b87516315d6cfe83b92
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  - device_id: 1e7ba22f703c2b87516315d6cfe83b92
+    domain: zha
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    target:
+      entity_id:
+      - switch.sonoff_10012c7d0c_1
+      - switch.sonoff_10012c6ed8_1
+  mode: single
+- id: '1677953025562'
+  alias: Aprinde lumina balcon living
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 60b894d448f38ef36d836cb0e16ead08
+    entity_id: binary_sensor.ewelink_ms01_iaszone
+    domain: binary_sensor
+  condition:
+  - condition: sun
+    before: sunrise
+    after: sunset
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.sonoff_100136df77
+  mode: single
+- id: '1677953084647'
+  alias: Stinge lumina balcon living
+  description: Stinge lumina balcon living
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: 60b894d448f38ef36d836cb0e16ead08
+    entity_id: binary_sensor.ewelink_ms01_iaszone
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.sonoff_100136df77
+  mode: single
+- id: '1677954080566'
+  alias: Aprinde veioza coffee
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: f61ccb330fc6a0e1ceb8d39a9a5cf9a6
+    entity_id: binary_sensor.ewelink_ms03_iaszone_2
+    domain: binary_sensor
+  condition:
+  - condition: time
+    after: 05:00:00
+    before: '23:00:00'
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.sonoff_10012c6ed8_1
+  mode: single
+- id: '1677954122469'
+  alias: Stinge veioza coffee
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: f61ccb330fc6a0e1ceb8d39a9a5cf9a6
+    entity_id: binary_sensor.ewelink_ms03_iaszone_2
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.sonoff_10012c6ed8_1
+  mode: single
+- id: '1678008783726'
+  alias: Turn on Timer ventilator baie mica
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: b20a63dcde04eec089c7f44059f77825
+    entity_id: switch.releu_ventilator_baie_mica_switch
+    domain: switch
+  condition: []
+  action:
+  - service: timer.start
+    data: {}
+    target:
+      entity_id: timer.timer_ventilator_toaleta
+  - service: humidifier.set_humidity
+    data:
+      humidity: 99
+    target:
+      entity_id: humidifier.toilet
+  mode: single
+- id: '1678013548266'
+  alias: Turn off ventilator baie by timer
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - timer.timer_ventilator_toaleta
+    to: idle
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.releu_ventilator_baie_mica_switch
+  - service: humidifier.set_humidity
+    data:
+      humidity: '{{int(states.input_number.target_toilet_humidity.state,55)}}'
+    target:
+      entity_id: humidifier.toilet
+  mode: single
+- id: '1678014847358'
+  alias: Turn on Priza IKEA Zigbee by schedule
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.orar_lumina_hol
+    from: 'on'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 787cf71ceaa9c2901efc25af4a8a72c9
+    entity_id: switch.priza_ikea_zigbee_switch
+    domain: switch
+  mode: single
+- id: '1678014892960'
+  alias: Turn off Priza IKEA ZigBee by schedule
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.orar_lumina_hol
+    from: 'off'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 787cf71ceaa9c2901efc25af4a8a72c9
+    entity_id: switch.priza_ikea_zigbee_switch
+    domain: switch
+  mode: single
+- id: '1678133919751'
+  alias: Prezenta detectata Opanez
+  description: Prezenta detectata Opanez
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.1001395f33_0
+    - binary_sensor.1001395f33_1
+    to: 'on'
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.prezenta_opanez
+  mode: single
+- id: '1678134379173'
+  alias: Prezenta resetata in Opanez
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.lumi_lumi_sensor_magnet_aq2_opening
+    to: 'on'
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.prezenta_opanez
+  mode: single
+- id: '1678134512759'
+  alias: Prezenta Judetului detectata
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.sonoff_a480032008
+    - binary_sensor.sonoff_a480032005
+    to: 'on'
+    from: 'off'
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.prezenta_judetului
+  - service: timer.start
+    data: {}
+    target:
+      entity_id: timer.timer_maia_venita
+  mode: single
+- id: '1678134567997'
+  alias: Prezenta Judetului resetata
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.sonoff_a480032b1a
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.prezenta_judetului
+  - service: timer.start
+    data: {}
+    target:
+      entity_id: timer.timer_maia_plecata
+  - service: counter.increment
+    data: {}
+    target:
+      entity_id: counter.count_door_open_for_judetului
+  mode: single
+- id: '1678137274984'
+  alias: Aprinde LED TV
+  description: ''
+  trigger:
+  - platform: device
+    device_id: ac63e9ea1f9db9b0baaaec3c3f720ee9
+    domain: media_player
+    entity_id: media_player.ue40es5500
+    type: turned_on
+  condition:
+  - condition: sun
+    after: sunset
+  - condition: state
+    entity_id: schedule.orar_lumina_hol
+    state: 'on'
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.led_tv
+  mode: single
+- id: '1678137320441'
+  alias: Stinge LED TV
+  description: ''
+  trigger:
+  - platform: device
+    device_id: ac63e9ea1f9db9b0baaaec3c3f720ee9
+    domain: media_player
+    entity_id: media_player.ue40es5500
+    type: turned_off
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.led_tv
+  mode: single
+- id: '1678281578081'
+  alias: Clear timer if ventilator baie este oprit
+  description: Clear timer if ventilator baie este oprit
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: b20a63dcde04eec089c7f44059f77825
+    entity_id: fan.releu_ventilator_baie_mica_switch
+    domain: fan
+  condition: []
+  action:
+  - service: timer.finish
+    data: {}
+    target:
+      entity_id: timer.timer_ventilator_toaleta
+  - service: humidifier.set_humidity
+    data:
+      humidity: '{{int(states.input_number.target_toilet_humidity.state,55)}}'
+    target:
+      entity_id: humidifier.toilet
+  mode: single
+- id: '1679216028939'
+  alias: Start camera and timer on door open
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.lumi_lumi_sensor_magnet_aq2_opening
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.tapo_camera_privacy
+  - service: camera.record
+    target:
+      entity_id: camera.tapo_camera_hd_stream
+    data:
+      filename: /config/tmp/tapo_{{ now().strftime("%Y-%m-%d-%H%M%S") }}.mp4
+  - service: notify.pushbullet
+    data:
+      message: Door open Opanez
+  - service: counter.increment
+    data: {}
+    target:
+      entity_id: counter.count_door_open_opanez
+  mode: single
+- id: '1679216145004'
+  alias: Turn of camera after timer expired
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - timer.camera_timer
+    from: active
+    to: idle
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.tapo_camera_privacy
+  mode: single
+- id: '1679219072354'
+  alias: Start recording on camera motion detected
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 51896356d43ceb4ff2cd9d43a067f356
+    entity_id: binary_sensor.tapo_camera_motion
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: camera.record
+    target:
+      entity_id: camera.tapo_camera_hd_stream
+    data:
+      filename: /config/tmp/tapo_{{ now().strftime("%Y-%m-%d-%H%M%Sd") }}.mp4
+  - service: notify.pushbullet
+    data:
+      message: Tapo camera started recording
+  mode: single
+- id: '1679219227384'
+  alias: Start camera timer on presence detected
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.opanez_occupied
+    to: 'on'
+  condition: []
+  action:
+  - service: timer.start
+    data: {}
+    target:
+      entity_id: timer.camera_timer
+  mode: single
+- id: '1679234128545'
+  alias: Push button effect for RGB LED
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.led_rgb_blue
+  - platform: state
+    entity_id: switch.led_rgb_blue2
+  - platform: state
+    entity_id: switch.led_rgb_blue_indigo
+  - platform: state
+    entity_id: switch.led_rgb_brite
+  - platform: state
+    entity_id: switch.led_rgb_dim
+  - platform: state
+    entity_id: switch.led_rgb_fade
+  - platform: state
+    entity_id: switch.led_rgb_flash
+  - platform: state
+    entity_id: switch.led_rgb_green
+  - platform: state
+    entity_id: switch.led_rgb_green2
+  - platform: state
+    entity_id: switch.led_rgb_green3
+  - platform: state
+    entity_id: switch.led_rgb_green4
+  - platform: state
+    entity_id: switch.led_rgb_green5
+  - platform: state
+    entity_id: switch.led_rgb_indigo
+  - platform: state
+    entity_id: switch.led_rgb_indigo_blue
+  - platform: state
+    entity_id: switch.led_rgb_orange
+  - platform: state
+    entity_id: switch.led_rgb_orange_yellow
+  - platform: state
+    entity_id: switch.led_rgb_red
+  - platform: state
+    entity_id: switch.led_rgb_red_orange
+  - platform: state
+    entity_id: switch.led_rgb_smooth
+  - platform: state
+    entity_id: switch.led_rgb_strobe
+  - platform: state
+    entity_id: switch.led_rgb_white
+  - platform: state
+    entity_id: switch.led_rgb_yellow
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 500
+  - service: switch.turn_off
+    target:
+      entity_id:
+      - switch.led_rgb_blue
+      - switch.led_rgb_blue2
+      - switch.led_rgb_blue_indigo
+      - switch.led_rgb_brite
+      - switch.led_rgb_dim
+      - switch.led_rgb_fade
+      - switch.led_rgb_flash
+      - switch.led_rgb_green
+      - switch.led_rgb_green2
+      - switch.led_rgb_green3
+      - switch.led_rgb_green4
+      - switch.led_rgb_green5
+      - switch.led_rgb_indigo
+      - switch.led_rgb_indigo_blue
+      - switch.led_rgb_orange
+      - switch.led_rgb_orange_yellow
+      - switch.led_rgb_red
+      - switch.led_rgb_red_orange
+      - switch.led_rgb_smooth
+      - switch.led_rgb_strobe
+      - switch.led_rgb_white
+      - switch.led_rgb_yellow
+  mode: single
+- id: '1679246848996'
+  alias: Maia plecata de 10 minute
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - timer.timer_maia_plecata
+    from: active
+    to: idle
+  condition:
+  - condition: state
+    entity_id: input_boolean.prezenta_judetului
+    state: 'off'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Maia plecata de 10 minute
+  mode: single
+- id: '1679336154771'
+  alias: Senzor de umiditate baie mica activ
+  description: ''
+  trigger:
+  - type: moist
+    platform: device
+    device_id: b8d8076d809113a0ddaf9bfbf7a917f6
+    entity_id: binary_sensor.lumi_lumi_sensor_wleak_aq1_iaszone
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Senzor de umiditate baie mica activ
+  mode: single
+- id: '1679336245878'
+  alias: Senzor de umiditate debara activ
+  description: ''
+  trigger:
+  - type: moist
+    platform: device
+    device_id: 33b35543f38ae9d0e18791699e5009ed
+    entity_id: binary_sensor.lumi_lumi_sensor_wleak_aq1_iaszone_2
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Senzor de umiditate debara activ
+  mode: single
+- id: '1679512192211'
+  alias: Maia venita de 10 minute
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - timer.timer_maia_venita
+    from: active
+    to: idle
+  condition:
+  - condition: state
+    entity_id: input_boolean.prezenta_judetului
+    state: 'on'
+  action:
+  - service: notify.pushbullet
+    data:
+      message: Maia venita de 10 minute
+  mode: single
+- id: '1679842623995'
+  alias: 'Reset all counters at midnight '
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00:00
+  condition: []
+  action:
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id:
+      - counter.count_door_open_for_judetului
+      - counter.count_door_open_opanez
+  mode: single
+- id: '1681661854044'
+  alias: Change humidity target by external slider
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_number.target_toilet_humidity
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: humidifier.set_humidity
+    data:
+      humidity: '{{int(states.input_number.target_toilet_humidity.state,55)}}'
+    target:
+      entity_id: humidifier.toilet
+  mode: single
+- id: '1681671431708'
+  alias: Stinge lumina cand se inchide usa
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.lumi_lumi_sensor_magnet_aq2_opening
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.1001395f33_0
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.1001395f33_1
+    state: 'off'
+  action:
+  - type: turn_off
+    device_id: c13f800c59d9472ad6a1a91c89d2ef62
+    entity_id: light.lumi_lumi_switch_l1aeu1_light
+    domain: light
+  mode: single

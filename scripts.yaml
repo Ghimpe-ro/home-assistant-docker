@@ -1,0 +1,36 @@
+push_button_off:
+  alias: LED RGB ON
+  sequence:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.led_rgb_on
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 500
+  - service: switch.turn_off
+    target:
+      entity_id: switch.led_rgb_on
+  mode: single
+  icon: mdi:led-on
+
+push_button_on:
+  alias: LED RGB OFF
+  sequence:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.led_rgb_off
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 500
+  - service: switch.turn_off
+    target:
+      entity_id: switch.led_rgb_off
+  - service: switch.turn_off
+    target:
+      entity_id: switch.led_rgb_on   
+  mode: single
+  icon: mdi:led-variant-off
