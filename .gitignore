@@ -27,3 +27,4 @@ zigbee.db-wal
 zigbee.db
 .HA_VERSION
 secrets.yaml
+.shopping_list.json
