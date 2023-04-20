@@ -573,7 +573,7 @@
       - switch.led_rgb_yellow
   mode: single
 - id: '1679246848996'
-  alias: Maia plecata de 10 minute
+  alias: Judetului nimeni acasa de 10 minute
   description: ''
   trigger:
   - platform: state
@@ -588,7 +588,7 @@
   action:
   - service: notify.pushbullet
     data:
-      message: Maia plecata de 10 minute
+      message: Judetului nimeni acasa de 10 minute
   mode: single
 - id: '1679336154771'
   alias: Senzor de umiditate baie mica activ
@@ -621,7 +621,7 @@
       message: Senzor de umiditate debara activ
   mode: single
 - id: '1679512192211'
-  alias: Maia venita de 10 minute
+  alias: Judetului cineva acasa de 10 minute
   description: ''
   trigger:
   - platform: state
@@ -636,7 +636,7 @@
   action:
   - service: notify.pushbullet
     data:
-      message: Maia venita de 10 minute
+      message: Judetului cineva acasa de 10 minute
   mode: single
 - id: '1679842623995'
   alias: 'Reset all counters at midnight '
