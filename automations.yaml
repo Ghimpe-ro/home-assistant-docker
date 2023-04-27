@@ -316,9 +316,7 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.sonoff_a480032008
     - binary_sensor.sonoff_a480032005
-    to: 'on'
     from: 'off'
   condition: []
   action:
