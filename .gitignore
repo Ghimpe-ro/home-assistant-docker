@@ -2,6 +2,7 @@
 /.storage/
 /appdaemon/
 /backups/
+/image/
 /custom_components/
 .vscode/
 /deps/
