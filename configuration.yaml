@@ -89,36 +89,36 @@ zone:
     longitude: 26.114209592342377
     radius: 29.0
     icon: mdi:map-marker
-  - name: Promenda-Sky Tower
+  - name: Promenda - Sky Tower
     latitude: 44.47808977335862
     longitude: 26.103708744049076
-    radius: 120.38016249893454
+    radius: 120.0
     icon: mdi:map-marker
   - name: Tulcea - Isaccei 29
     latitude: 45.17942495074601
     longitude: 28.79516333341599
-    radius: 29.754978019457855
+    radius: 29.0
     icon: mdi:home-heart
   - name: Slanic-Grosani-Str Izvor
     latitude: 45.245936329454544
     longitude: 25.947850942611698
-    radius: 81.2672158359266
+    radius: 80.0
     icon: mdi:greenhouse
   - name: Finii mici Bragadiru
     latitude: 44.38271975592732
     longitude: 26.027351617813114
-    radius: 78.12210743224595
+    radius: 80.0
     icon: mdi:map-marker
   - name: AFI Europe - Pta Victoriei
     latitude: 44.45379469785626
     longitude: 26.08681688965803
-    radius: 100.0
+    radius: 80.0
     icon: mdi:map-marker
   - name: Ion Mihalache - Lunch
     latitude: 44.45493196005009
     longitude: 26.081451773643497
     icon: mdi:map-marker
-    radius: 114.40815916117002
+    radius: 80.0
   - name: America House
     latitude: 44.45236255734759
     longitude: 26.08213305473328
