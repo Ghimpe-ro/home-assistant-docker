@@ -2,15 +2,15 @@
   alias: Aprinde lumina pe hol
   description: ''
   trigger:
-  - type: turned_on
+  - type: motion
     platform: device
     device_id: 31819de73fec99a575e630b9700975fe
     entity_id: binary_sensor.1001395f33_0
     domain: binary_sensor
-  - type: turned_on
+  - type: motion
     platform: device
     device_id: 31819de73fec99a575e630b9700975fe
-    entity_id: binary_sensor.1001395f33_1
+    entity_id: binary_sensor.1001395f33_0
     domain: binary_sensor
   - platform: state
     entity_id:
@@ -26,25 +26,33 @@
     entity_id: light.lumi_lumi_switch_l1aeu1_light
     state: 'off'
   action:
-  - service: light.turn_on
+  - service: switch.turn_on
     data: {}
     target:
-      entity_id: light.lumi_lumi_switch_l1aeu1_light
+      entity_id: switch.intrerupator_aqara_intrare_switch
   mode: single
 - id: '1677443952428'
   alias: 'Stinge lumina pe hol '
   description: ''
   trigger:
-  - type: turned_off
+  - type: no_motion
     platform: device
     device_id: 31819de73fec99a575e630b9700975fe
     entity_id: binary_sensor.1001395f33_0
     domain: binary_sensor
-  - type: turned_off
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  - type: no_motion
     platform: device
     device_id: 31819de73fec99a575e630b9700975fe
-    entity_id: binary_sensor.1001395f33_1
+    entity_id: binary_sensor.1001395f33_0
     domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
   condition:
   - condition: state
     entity_id: light.lumi_lumi_switch_l1aeu1_light
@@ -64,11 +72,11 @@
   alias: Aprinde plafoniera cand se apasa buton pe hol
   description: ''
   trigger:
-  - platform: device
-    type: turned_on
-    device_id: c13f800c59d9472ad6a1a91c89d2ef62
-    entity_id: light.lumi_lumi_switch_l1aeu1_light
-    domain: light
+  - device_id: c13f800c59d9472ad6a1a91c89d2ef62
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: button
   condition:
   - condition: state
     entity_id: schedule.orar_lumina_hol
@@ -86,8 +94,8 @@
   - platform: device
     type: turned_off
     device_id: c13f800c59d9472ad6a1a91c89d2ef62
-    entity_id: light.lumi_lumi_switch_l1aeu1_light
-    domain: light
+    entity_id: switch.intrerupator_aqara_intrare_switch
+    domain: switch
   condition: []
   action:
   - service: switch.turn_off
@@ -685,8 +693,29 @@
     entity_id: binary_sensor.1001395f33_1
     state: 'off'
   action:
-  - type: turn_off
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.intrerupator_aqara_intrare_switch
+  mode: single
+- id: '1686320139247'
+  alias: Aprinde lumina hol noua
+  description: Aprinde lumina hol noua
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.1001395f33_0
+    from: 'off'
+    to: 'on'
+  - platform: state
+    entity_id:
+    - binary_sensor.1001395f33_1
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - type: turn_on
     device_id: c13f800c59d9472ad6a1a91c89d2ef62
-    entity_id: light.lumi_lumi_switch_l1aeu1_light
-    domain: light
+    entity_id: switch.intrerupator_aqara_intrare_switch
+    domain: switch
   mode: single

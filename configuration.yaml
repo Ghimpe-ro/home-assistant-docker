@@ -220,18 +220,18 @@ switch:
         command_on: "JgBYAAABLJMVEBURFBEVEBURFRAVERQRFTUUNhQ1FTUVERQ2FDUVNRU1FTUVEBURFTUUERUQFREUERUQFTUVNRUQFTUVNRU1FQAFSAABK0gVAAxhAAErSRcADQU="
       - name: "LED RGB smooth"
         command_on: "JgBYAAABLJITExUQFRAWEBQRFRAVERUQFTUVNRM3EjcWEBM3FTQVNRY0EzcTNxMSEzcTEhUREhMVEBQSFBEVNRUQFTUVNRU1EwAFSQABK0kUAAxjAAEqSRQADQU="
-sensor:
-  platform: feedparser
-  name: Biziday Feed
-  feed_url: 'https://www.biziday.ro/feed/'
-  date_format: '%a, %d %b %Y %H:%M:%S %Z'
-  scan_interval:
-    hours: 4
-  inclusions:
-    - title
-    - link
-    - description
-    - pubDate
-    - image
-  exclusions:
-    - language
+# sensor:
+#   platform: feedparser
+#   name: Biziday Feed
+#   feed_url: 'https://www.biziday.ro/feed/'
+#   date_format: '%a, %d %b %Y %H:%M:%S %Z'
+#   scan_interval:
+#     hours: 4
+#   inclusions:
+#     - title
+#     - link
+#     - description
+#     - pubDate
+#     - image
+#   exclusions:
+#     - language
